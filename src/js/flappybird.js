@@ -72,7 +72,7 @@ function Barriers(height, width, opening, space, pointNotification) {
 
             const middle = width / 2
             const crossedTheMiddle = pair.getX() + displacement >= middle && pair.getX() < middle
-            // crossedTheMiddle && pointNotification()
+            crossedTheMiddle && pointNotification() 
         })
     }
 }
@@ -104,23 +104,50 @@ function Bird(canvasHeight) {
     this.setY(canvasHeight / 2)
 }
 
+
+function Progress() {
+    this.element = newElement('span', 'score-progress')
+    this.scoreUpdate = score => {
+        this.element.innerHTML = score
+    }
+    this.scoreUpdate(0)
+}
+
 // TEST ONLY
-// const b = new Barriers(700, 1200, 200, 400)
 // const gameArea = document.querySelector('[fb-root]')
+// const barriers = new Barriers(700, 1200, 200, 400)
 // const bird = new Bird(700)
-
+// const scoreProgress = new Progress()
 // gameArea.appendChild(bird.element)
-
-// b.pairs.forEach(pair => gameArea.appendChild(pair.element))
-
-// let count = 0
-
+// gameArea.appendChild(scoreProgress.element)
+// barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
 // const timer = setInterval(() => {
-//     // count >= 1200 && clearInterval(timer)
-
-//     b.animate()
+//     barriers.animate()
 //     bird.animate()
-
-//     count++
-
 // }, 24)
+
+
+function FlappyBird() {
+    let scores = 0
+
+    const gameArea = document.querySelector('[fb-root]')
+    const height = gameArea.clientHeight
+    const width = gameArea.clientWidth
+
+    const progress = new Progress()
+    const barriers = new Barriers(height, width, 200, 400, () => progress.scoreUpdate(++scores))
+    const bird = new Bird(height)
+
+    gameArea.appendChild(progress.element)
+    gameArea.appendChild(bird.element)
+    barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
+
+    this.start = () => {
+        const timer = setInterval(() => {
+            barriers.animate()
+            bird.animate()
+        }, 24)
+    }
+}
+
+new FlappyBird().start()
