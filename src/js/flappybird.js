@@ -16,11 +16,6 @@ function Barrier(reverse = false) {
     this.setHeight = height => barrierBody.style.height = `${height}px`
 }
 
-// ONLY TEST
-// const b = new Barrier(true)
-// b.setHeight(200)
-// document.querySelector('[fb-root]').appendChild(b.element)
-
 function BarriersGroup(height, opening, x) {
     this.element = newElement('div', 'barriers-group')
 
@@ -44,11 +39,6 @@ function BarriersGroup(height, opening, x) {
     this.sortSpaceBetween()
     this.setX(x)
 }
-
-// TEST ONLY
-// const b2 = new BarriersGroup(700, 200, 400)
-// document.querySelector('[fb-root]').appendChild(b2.element)
-
 
 function Barriers(height, width, opening, space, pointNotification) {
     this.pairs = [
@@ -112,19 +102,6 @@ function Progress() {
     }
     this.scoreUpdate(0)
 }
-
-// TEST ONLY
-// const gameArea = document.querySelector('[fb-root]')
-// const barriers = new Barriers(700, 1200, 200, 400)
-// const bird = new Bird(700)
-// const scoreProgress = new Progress()
-// gameArea.appendChild(bird.element)
-// gameArea.appendChild(scoreProgress.element)
-// barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
-// const timer = setInterval(() => {
-//     barriers.animate()
-//     bird.animate()
-// }, 24)
 
 function overlapping(elA, elB) {
     const a = elA.getBoundingClientRect()
