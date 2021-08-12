@@ -71,7 +71,7 @@ function Bird(canvasHeight) {
     let flying = false
 
     this.element = newElement('img', 'bird')
-    this.element.src = '../src/imgs/passaro.png'
+    this.element.src = '../src/imgs/bird.png'
 
     this.getY = () => parseInt(this.element.style.bottom.split('px')[0])
     this.setY = y => this.element.style.bottom = `${y}px`
